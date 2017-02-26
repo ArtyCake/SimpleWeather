@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="title_activity_about">О приложении</string>
+    <string name="temp_min_label">мин:</string>
+    <string name="temp_max_label">макс:</string>
+    <string name="first_load_can_take_around_a_minute_to_complete">Первая загрузка может длиться около минуты</string>
+    <string name="option_refresh">Обновить</string>
+    <string name="option_settings">Настройки</string>
+    <string name="option_about">О приложении</string>
+    <string name="about_main">Приложение было создано для практики</string>
+    <string name="about_icon">"Источник иконок: "</string>
+    <string name="about_api">"Сервис погоды: "</string>
+    <string name="no_city_selected">Город не выбран</string>
+    <string name="rate_content">Если вам понравилось приложение %s, пожалуйста, оцените его.\nСпасибо за поддержку!</string>
+    <string name="rate_dialog_title">Оцените %s</string>
+    <string name="rate_hide_btn">Нет, спасибо</string>
+    <string name="rate_skip_btn">Позже</string>
+    <string name="location_hint">Введите название города на английском языке. Например Moscow</string>
+    <string name="rate_btn">Оценить</string>
+    <string name="widget_no_city">Город не выбран. Нажмите на виджет и выберите город</string>
+</resources>
