@@ -54,7 +54,7 @@ public class BigWeatherWidget extends AppWidgetProvider {
         if (day != null) {
             views.setTextViewText(R.id.widget_day_name, day.getDayName());
             views.setTextViewText(R.id.widget_city, preferencesService.getStringPref(PreferencesService.LOCATION_CITY_NAME, null));
-            views.setTextViewText(R.id.widget_current_description, Localization.ucFirst(Localization.getDescription(context, day.getShortDescription())));
+            views.setTextViewText(R.id.widget_current_description, day.getShortDescription());
             views.setTextViewText(R.id.widget_current_temp, Localization.getFormattedTemp(day.getCurrentTemp(), units));
             views.setImageViewResource(R.id.widget_weather_icon, day.getIconId());
         }

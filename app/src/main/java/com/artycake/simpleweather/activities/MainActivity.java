@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
         temperatureMax.setText(Localization.getFormattedTemp(day.getMaxTemp(), units));
         temperatureMin.setText(Localization.getFormattedTemp(day.getMinTemp(), units));
         weathericon.setImageDrawable(day.getIcon());
-        description.setText(Localization.ucFirst(Localization.getDescription(this, day.getShortDescription())));
+        description.setText(Localization.ucFirst(day.getShortDescription()));
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         day = RealmController.with(this).getDay(calendar.getTime());
         if (day == null) {

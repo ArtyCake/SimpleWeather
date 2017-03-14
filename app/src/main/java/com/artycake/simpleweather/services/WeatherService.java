@@ -1,12 +1,17 @@
 package com.artycake.simpleweather.services;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.SystemClock;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -16,6 +21,7 @@ import com.artycake.simpleweather.models.City;
 import com.artycake.simpleweather.models.WeatherData;
 import com.artycake.simpleweather.models.WeatherDay;
 import com.artycake.simpleweather.utils.DateDeserializer;
+import com.artycake.simpleweather.utils.Localization;
 import com.artycake.simpleweather.utils.PreferencesService;
 import com.artycake.simpleweather.utils.RealmController;
 import com.artycake.simpleweather.widgets.BigWeatherWidget;
@@ -71,6 +77,11 @@ public class WeatherService extends Service {
         };
         updateHandler = new Handler();
         updateTask.run();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_STICKY;
     }
 
     @Override
@@ -131,7 +142,12 @@ public class WeatherService extends Service {
         if (units == PreferencesService.FAHRENHEIT) {
             unitsName = "imperial";
         }
-        Call<WeatherData> call = apiInterface.getCityForecast(preferencesService.getIntPref(PreferencesService.LOCATION_CITY_ID, -1), unitsName);
+        Call<WeatherData> call = apiInterface
+                .getCityForecast(
+                        preferencesService.getIntPref(PreferencesService.LOCATION_CITY_ID, -1),
+                        unitsName,
+                        Localization.getWeatherLanguage()
+                );
         call.enqueue(new Callback<WeatherData>() {
             @Override
             public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
@@ -251,5 +267,19 @@ public class WeatherService extends Service {
                 }
             }
         });
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        Intent restartServiceTask = new Intent(getApplicationContext(), this.getClass());
+        restartServiceTask.setPackage(getPackageName());
+        PendingIntent restartPendingIntent = PendingIntent.getService(getApplicationContext(), 1, restartServiceTask, PendingIntent.FLAG_ONE_SHOT);
+        AlarmManager myAlarmService = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        myAlarmService.set(
+                AlarmManager.ELAPSED_REALTIME,
+                SystemClock.elapsedRealtime() + 1000,
+                restartPendingIntent);
+
+        super.onTaskRemoved(rootIntent);
     }
 }

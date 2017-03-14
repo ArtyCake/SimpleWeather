@@ -41,3 +41,4 @@ captures/
 
 # Api keys
 app/src/main/res/values/secrets.xml
+app/libs/

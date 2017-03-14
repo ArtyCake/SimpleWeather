@@ -16,7 +16,16 @@ import java.util.Locale;
  */
 
 public class Localization {
-    private final static List<Locale> availableLocales = new ArrayList<>(Arrays.asList(new Locale[]{new Locale("ru", "RU")}));
+    private final static Locale russian = new Locale("ru", "RU");
+    private final static List<Locale> availableLocales = new ArrayList<>(Arrays.asList(new Locale[]{russian}));
+
+    public static String getWeatherLanguage() {
+        if (getCurrentLocale().equals(russian)) {
+            return "ru";
+        }
+
+        return "en";
+    }
 
     public enum Units {METRIC, IMPERIAL}
 
@@ -46,7 +55,7 @@ public class Localization {
     }
 
     public static String getDescription(Context context, String description) {
-        String underscored =  TextUtils.replace(description, new String[]{" "}, new String[]{"_"}).toString();
+        String underscored = TextUtils.replace(description, new String[]{" "}, new String[]{"_"}).toString();
         int identifier = context.getResources().getIdentifier(underscored, "string", context.getPackageName());
         try {
             return context.getResources().getString(identifier);

@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 public interface WeatherApiInterface {
 
     @GET("forecast")
-    Call<WeatherData> getCityForecast(@Query("id") int id, @Query("units") String units);
+    Call<WeatherData> getCityForecast(@Query("id") int id, @Query("units") String units, @Query("lang") String language);
 
     @GET("forecast")
     Call<WeatherData> getCoordForecast(@Query("lon") float longitude, @Query("lat") float latitude);
