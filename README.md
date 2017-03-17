@@ -1,6 +1,5 @@
 # SimpleWeather
-[Play Market](https://play.google.com/store/apps/details?id=com.artycake.simpleweather)
-[Demo video](https://youtu.be/KqK29CLekAQ)
+[Play Market](https://play.google.com/store/apps/details?id=com.artycake.simpleweather) | [Demo video](https://youtu.be/KqK29CLekAQ)
 
 SimpleWeather - a simple and convenient way to be aware of weather changes in the next few days.
 
